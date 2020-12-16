@@ -90,7 +90,10 @@ def build_vocabs_and_xml():
   # as attributes
   for sg in data:    
     for obj in sg['objects']:
-      o,a = clean_objects(obj['names'][0], common_attributes)
+      if len(obj['synsets']) > 0:
+        o,a = clean_objects(obj['synsets'][0].split(".")[0], common_attributes)
+      else:
+        o,a = clean_objects(obj['names'][0], common_attributes)
       objects.update(o)
       attributes.update(a)
   
